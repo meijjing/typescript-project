@@ -4,4 +4,9 @@ export const menu = [
     icon: 'abc',
     path: '/word-chain',
   },
+  {
+    title: '로또',
+    icon: 'casino',
+    path: '/lotto',
+  },
 ];

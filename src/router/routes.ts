@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from 'vue-router';
-
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -8,7 +7,6 @@ const routes: RouteRecordRaw[] = [
       { path: '', component: () => import('pages/Index.vue') },
       {
         path: 'word-chain',
-        redirect: '',
         children: [
           {
             name: '유저선택',
@@ -19,6 +17,17 @@ const routes: RouteRecordRaw[] = [
             name: '끝말잇기',
             path: ':userCount',
             component: () => import('pages/wordChain/WordChain.vue'),
+          },
+        ],
+      },
+      {
+        path: 'lotto',
+        redirect: '',
+        children: [
+          {
+            name: '로또',
+            path: '',
+            component: () => import('pages/lotto/Lotto.vue'),
           },
         ],
       },

@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, type Ref } from 'vue';
 
 export default {
   name: 'SelectUsers',
