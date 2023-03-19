@@ -48,12 +48,10 @@ export default {
     const selectedValue: Ref<userOpts | null> = ref(null);
 
     (function init() {
-      for (let i = 2; i < 7; i++) {
-        userOptions.value.push({
-          label: `${i}명`,
-          value: i,
-        });
-      }
+      userOptions.value = Array.from({ length: 5 }, (_, i: number) => ({
+        label: `${i + 2}명`,
+        value: i + 2,
+      }));
     })();
 
     return {

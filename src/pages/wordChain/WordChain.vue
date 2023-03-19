@@ -13,7 +13,7 @@
               <q-avatar size="32px" color="grey-4">{{ user }}</q-avatar>
             </q-item-section>
             <q-item-section> user{{ user }} </q-item-section>
-            <q-item-section side> timer </q-item-section>
+            <!-- <q-item-section side> timer </q-item-section> -->
           </q-item>
         </q-list>
       </q-card-section>
@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { Dialog } from 'quasar';
 import GameoverDialog from 'src/components/wordChain/GameoverDialog.vue';
@@ -62,22 +62,27 @@ export default {
       const lastWord = word.value.slice(-1);
       const firstWord = inputValue.value.charAt(0);
 
+      // TODO : 배열에 집어넣어서 중복검사해주기
       if (lastWord.toLowerCase() === firstWord.toLowerCase()) {
         word.value = inputValue.value;
-        if (activeUser.value + 1 > Number(route.params.userCount)) {
-          activeUser.value = 1;
-        } else {
-          activeUser.value++;
-        }
+
+        activeUser.value =
+          activeUser.value + 1 > Number(route.params.userCount)
+            ? 1
+            : activeUser.value + 1;
         inputValue.value = '';
-      } else {
-        Dialog.create({
-          component: GameoverDialog,
-          componentProps: {
-            userName: `user${activeUser.value}`,
-          },
-        });
+        return;
       }
+      Dialog.create({
+        component: GameoverDialog,
+        componentProps: {
+          userName: `user${activeUser.value}`,
+        },
+      }).onOk(() => {
+        activeUser.value = 1;
+        word.value = '바보';
+        inputValue.value = '';
+      });
     }
 
     return {
