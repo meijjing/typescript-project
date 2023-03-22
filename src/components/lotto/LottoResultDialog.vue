@@ -1,5 +1,9 @@
 <template>
-  <q-dialog class="lotto-result-dialog" ref="dialogRef" @hide="onDialogHide">
+  <q-dialog
+    class="lotto-result-dialog"
+    ref="dialogRef"
+    @keyup.esc="onDialogHide"
+  >
     <q-card>
       <q-card-section
         class="q-py-sm bg-black text-white text-bold text-subtitle1 text-center"
@@ -8,8 +12,8 @@
       </q-card-section>
 
       <q-card-section class="q-px-xl q-py-lg">
-        <div class="flex no-wrap items-center">
-          <b class="q-mr-sm">당첨번호</b>
+        <div class="flex column flex-center">
+          <div class="text-bold q-mb-sm">당첨번호</div>
           <div class="flex no-wrap items-center">
             <div
               v-for="(num, idx) of winningNum"
@@ -23,7 +27,12 @@
           </div>
         </div>
 
-        <q-markup-table flat bordered separator="cell" class="q-mt-lg">
+        <q-markup-table
+          flat
+          bordered
+          separator="cell"
+          class="q-mt-lg q-mx-auto"
+        >
           <tbody>
             <tr v-for="(item, idx) of data" :key="idx">
               <td class="text-bold bg-grey-2 text-center">
@@ -56,10 +65,10 @@
       <q-card-actions align="center" class="q-pb-lg">
         <q-btn
           unelevated
-          color="black"
+          color="amber-9"
           :ripple="false"
           rounded
-          label="OK"
+          label="한 번 더?"
           size="16px"
           style="width: 200px"
           @click="onDialogOK"
@@ -141,12 +150,13 @@ export default defineComponent({
       .num {
         width: 40px;
         height: 40px;
-        background: $indigo-2;
+        background: $amber-2;
         border-radius: 50px;
         margin: 0 2px;
       }
     }
     .q-markup-table {
+      width: fit-content;
       border-radius: 16px;
       .q-table {
         tbody {
@@ -160,8 +170,9 @@ export default defineComponent({
                 color: $grey-7;
               }
               .win-num {
-                background: $deep-purple-7;
+                background: $deep-purple-9;
                 color: white;
+                font-weight: 500;
               }
               .not-win-num {
                 background: white !important;

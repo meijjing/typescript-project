@@ -1,27 +1,28 @@
 <template>
-  <q-page class="lotto-page flex justify-center">
-    <q-card flat lotto-card>
-      <q-card-section class="flex q-gutter-sm">
-        <lotto-form
-          v-for="(value, key) in lottoFormData"
-          :key="key"
-          v-model="value.value"
-          :title="value.label"
-        />
-      </q-card-section>
+  <q-page class="lotto-page q-pa-md">
+    <q-form
+      lotto-form
+      class="q-mx-auto flex flex-center q-gutter-sm"
+      @submit="onSubmit"
+    >
+      <lotto-form
+        v-for="(value, key) in lottoFormData"
+        :key="key"
+        v-model="value.value"
+        :title="value.label"
+      />
 
-      <q-card-actions class="flex flex-center">
-        <q-btn
-          label="submit"
-          :ripple="false"
-          rounded
-          color="black"
-          size="18px"
-          style="width: 200px"
-          @click="onSubmit"
-        />
-      </q-card-actions>
-    </q-card>
+      <q-btn
+        label="submit"
+        unelevated
+        :ripple="false"
+        rounded
+        color="amber-9"
+        size="18px"
+        style="width: 200px"
+        type="submit"
+      />
+    </q-form>
   </q-page>
 </template>
 
@@ -50,6 +51,34 @@ export default defineComponent({
       { label: 'E', value: [] },
     ]);
 
+    function getRandomNum(min: number, max: number) {
+      const result = Math.floor(Math.random() * (max - min + 1)) + min;
+      return result;
+    }
+    function setStartNum() {
+      winningNum = [];
+      for (let i = 0; i < 6; i++) {
+        const num = getRandomNum(1, 45);
+        if (!winningNum.includes(num)) {
+          winningNum.push(num);
+        } else {
+          i--;
+        }
+      }
+
+      for (let i = 0; i < 1; i++) {
+        const num = getRandomNum(1, 45);
+        if (!winningNum.includes(num)) {
+          bonusNum = num;
+        } else {
+          i--;
+        }
+      }
+
+      console.log('winningNum : ', winningNum);
+      console.log('bonusNum : ', bonusNum);
+    }
+
     function onSubmit() {
       const noChecked = lottoFormData.value.filter((v) => v.value.length !== 6);
       if (noChecked.length) {
@@ -68,32 +97,20 @@ export default defineComponent({
           bonusNum: bonusNum,
           data: lottoFormData.value,
         },
+      }).onOk(() => {
+        setStartNum();
+        lottoFormData.value = [
+          { label: 'A', value: [] },
+          { label: 'B', value: [] },
+          { label: 'C', value: [] },
+          { label: 'D', value: [] },
+          { label: 'E', value: [] },
+        ];
       });
     }
 
-    function getRandomNum(min: number, max: number) {
-      const result = Math.floor(Math.random() * (max - min + 1)) + min;
-      return result;
-    }
-
     (function init() {
-      for (let i = 0; i < 6; i++) {
-        const num = getRandomNum(1, 45);
-        if (!winningNum.includes(num)) {
-          winningNum.push(num);
-        } else {
-          i--;
-        }
-      }
-
-      for (let i = 0; i < 1; i++) {
-        const num = getRandomNum(1, 45);
-        if (!winningNum.includes(num)) {
-          bonusNum = num;
-        } else {
-          i--;
-        }
-      }
+      setStartNum();
     })();
 
     return {
@@ -106,9 +123,8 @@ export default defineComponent({
 
 <style lang="scss">
 .lotto-page {
-  > .q-card {
-    > .q-card__section {
-    }
+  .q-form {
+    width: fit-content;
   }
 }
 </style>
