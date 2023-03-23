@@ -35,7 +35,10 @@
         >
           <tbody>
             <tr v-for="(item, idx) of data" :key="idx">
-              <td class="text-bold bg-grey-2 text-center">
+              <td class="text-bold bg-grey-2">
+                {{ item.label }}
+              </td>
+              <td class="text-bold bg-grey-1 text-center">
                 {{ getRank(item.value) }}
               </td>
               <td>
@@ -170,8 +173,9 @@ export default defineComponent({
                 color: $grey-7;
               }
               .win-num {
-                background: $deep-purple-9;
-                color: white;
+                border: 1px solid $deep-purple-9;
+                color: $deep-purple-9;
+                background: $deep-purple-1;
                 font-weight: 500;
               }
               .not-win-num {

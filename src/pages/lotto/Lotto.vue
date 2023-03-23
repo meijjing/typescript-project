@@ -2,14 +2,14 @@
   <q-page class="lotto-page q-pa-md">
     <q-form
       lotto-form
-      class="q-mx-auto flex flex-center q-gutter-sm"
+      class="q-mx-auto flex column flex-center q-gutter-sm"
       @submit="onSubmit"
     >
       <lotto-form
-        v-for="(value, key) in lottoFormData"
-        :key="key"
-        v-model="value.value"
-        :title="value.label"
+        v-for="(form, idx) in lottoFormData"
+        :key="idx"
+        v-model="form.value"
+        :title="form.label"
       />
 
       <q-btn
@@ -82,9 +82,8 @@ export default defineComponent({
     function onSubmit() {
       const noChecked = lottoFormData.value.filter((v) => v.value.length !== 6);
       if (noChecked.length) {
-        console.log('no : ', noChecked);
         Notify.create({
-          message: '숫자를 모두 선택해주세요.',
+          message: '6자리 숫자를 모두 선택해주세요.',
           color: 'negative',
         });
         return;

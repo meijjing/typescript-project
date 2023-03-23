@@ -42,7 +42,6 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       (newVal) => {
-        console.log('watch : ', newVal);
         model.value = newVal;
       }
     );
