@@ -31,6 +31,18 @@ const routes: RouteRecordRaw[] = [
           },
         ],
       },
+      {
+        path: '/rock-paper-scissors',
+        redirect: '',
+        children: [
+          {
+            name: '가위바위보',
+            path: '',
+            component: () =>
+              import('pages/rockPaperScissors/RockPaperScissors.vue'),
+          },
+        ],
+      },
     ],
   },
 

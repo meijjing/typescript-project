@@ -9,4 +9,9 @@ export const menu = [
     icon: 'casino',
     path: '/lotto',
   },
+  {
+    title: '가위바위보',
+    icon: 'casino',
+    path: '/rock-paper-scissors',
+  },
 ];
