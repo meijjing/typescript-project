@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, type Ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Intro from 'src/components/rockPaperScissors/Intro.vue';
 import GameCard from 'src/components/rockPaperScissors/GameCard.vue';
 
