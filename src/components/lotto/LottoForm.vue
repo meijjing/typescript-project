@@ -74,7 +74,6 @@ export default defineComponent({
     watch(
       () => props.activeForm,
       (newVal) => {
-        console.log('watch');
         isAuto.value = false;
 
         model.value = newVal;
