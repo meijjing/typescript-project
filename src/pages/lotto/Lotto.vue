@@ -57,33 +57,29 @@ export default defineComponent({
     }
     function setStartNum() {
       winningNum = [];
-      for (let i = 0; i < 6; i++) {
+
+      // FIXME : while문 사용
+      while (winningNum.length < 7) {
         const num = getRandomNum(1, 45);
         if (!winningNum.includes(num)) {
           winningNum.push(num);
-        } else {
-          i--;
         }
       }
 
-      for (let i = 0; i < 1; i++) {
+      // FIXME : while문 사용
+      while (bonusNum === 0) {
         const num = getRandomNum(1, 45);
         if (!winningNum.includes(num)) {
           bonusNum = num;
-        } else {
-          i--;
         }
       }
-
-      console.log('winningNum : ', winningNum);
-      console.log('bonusNum : ', bonusNum);
     }
 
     function onSubmit() {
-      const noChecked = lottoFormData.value.filter((v) => v.value.length !== 6);
+      const noChecked = lottoFormData.value.filter((v) => v.value.length !== 7);
       if (noChecked.length) {
         Notify.create({
-          message: '6자리 숫자를 모두 선택해주세요.',
+          message: '7자리 숫자를 모두 선택해주세요.',
           color: 'negative',
         });
         return;

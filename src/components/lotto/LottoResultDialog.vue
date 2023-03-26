@@ -82,8 +82,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
+
+interface lottoForm {
+  label: string;
+  value: number[];
+}
 
 export default defineComponent({
   name: 'LottoResultDialog',
@@ -97,7 +102,7 @@ export default defineComponent({
       default: 0,
     },
     data: {
-      type: Array,
+      type: Array as PropType<lottoForm[]>,
       default: () => [],
     },
   },
@@ -107,24 +112,23 @@ export default defineComponent({
 
     function getRank(val: number[]) {
       const correct = val.filter((v) => props.winningNum.includes(Number(v)));
-      console.log('correct : ', correct);
 
       switch (correct.length) {
-        case 6:
+        case 7:
           return '1등';
           break;
-        case 5:
+        case 6:
           if (correct.includes(props.bonusNum)) {
             return '2등';
           } else {
             return '3등';
           }
           break;
-        case 4:
+        case 5:
           return '4등';
 
           break;
-        case 3:
+        case 4:
           return '5등';
 
           break;

@@ -47,10 +47,10 @@ export default defineComponent({
     );
 
     function updateCheckbox() {
-      if (model.value.length > 6) {
+      if (model.value.length > 7) {
         model.value.pop();
         Notify.create({
-          message: '6개 까지 선택가능합니다.',
+          message: '7개 까지 선택가능합니다.',
           color: 'negative',
         });
       }
