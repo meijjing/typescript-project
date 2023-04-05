@@ -114,6 +114,8 @@ export default defineComponent({
       return selectOptions[idx];
     };
 
+    // request animation
+
     function onClickItem(btnVal: btnValue) {
       selectedValue.value.user = btnVal;
       selectedValue.value.computer = exportComputerSelected();

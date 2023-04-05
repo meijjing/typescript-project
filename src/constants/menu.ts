@@ -14,4 +14,9 @@ export const menu = [
     icon: 'casino',
     path: '/rock-paper-scissors',
   },
+  {
+    title: '틱택토',
+    icon: 'casino',
+    path: '/tic-tac-toe',
+  },
 ];

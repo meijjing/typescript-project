@@ -21,27 +21,20 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        name: '로또',
         path: 'lotto',
-        redirect: '',
-        children: [
-          {
-            name: '로또',
-            path: '',
-            component: () => import('pages/lotto/Lotto.vue'),
-          },
-        ],
+        component: () => import('pages/lotto/Lotto.vue'),
       },
       {
+        name: '가위바위보',
         path: '/rock-paper-scissors',
-        redirect: '',
-        children: [
-          {
-            name: '가위바위보',
-            path: '',
-            component: () =>
-              import('pages/rockPaperScissors/RockPaperScissors.vue'),
-          },
-        ],
+        component: () =>
+          import('pages/rockPaperScissors/RockPaperScissors.vue'),
+      },
+      {
+        name: '틱택토',
+        path: '/tic-tac-toe',
+        component: () => import('pages/TicTacToe.vue'),
       },
     ],
   },
