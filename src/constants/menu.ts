@@ -24,4 +24,9 @@ export const menu = [
     icon: 'casino',
     path: '/card-matching',
   },
+  {
+    title: '룰렛',
+    icon: 'casino',
+    path: '/roulette',
+  },
 ];

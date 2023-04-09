@@ -41,6 +41,11 @@ const routes: RouteRecordRaw[] = [
         path: '/card-matching',
         component: () => import('pages/CardMatching.vue'),
       },
+      {
+        name: '룰렛',
+        path: '/roulette',
+        component: () => import('pages/Roulette.vue'),
+      },
     ],
   },
 
