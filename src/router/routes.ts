@@ -36,6 +36,11 @@ const routes: RouteRecordRaw[] = [
         path: '/tic-tac-toe',
         component: () => import('pages/TicTacToe.vue'),
       },
+      {
+        name: '카드 짝 맞추기',
+        path: '/card-matching',
+        component: () => import('pages/CardMatching.vue'),
+      },
     ],
   },
 

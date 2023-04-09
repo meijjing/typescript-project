@@ -19,4 +19,9 @@ export const menu = [
     icon: 'casino',
     path: '/tic-tac-toe',
   },
+  {
+    title: '카드 짝 맞추기',
+    icon: 'casino',
+    path: '/card-matching',
+  },
 ];
