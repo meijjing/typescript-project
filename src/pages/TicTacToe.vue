@@ -1,5 +1,6 @@
 <template>
   <q-page class="tic-tac-toe-page flex column flex-center">
+    <q-select :options="gameTypeOptions" v-model="gameType" class="q-mb-md" />
     <q-card>
       <q-card-section>
         <q-list class="flex no-wrap justify-between">
@@ -90,18 +91,24 @@
 <script lang="ts">
 import { defineComponent, ref, type Ref } from 'vue';
 
+const gameTypeOptions = [
+  { label: '컴퓨터와 대결하기', value: 'computer' },
+  { label: '친구와 대결하기', value: 'friend' },
+];
+
 export default defineComponent({
   name: 'TicTacToe',
   setup() {
-    type userScoreType = {
-      [key: string]: number;
-    };
+    // type userScoreType = {
+    //   [key: string]: number;
+    // };
+    const gameType = ref(gameTypeOptions[0]);
 
-    const userScore: Ref<userScoreType> = ref({
+    const userScore = ref({
       O: 0,
       X: 0,
     });
-    const activeUser = ref('O');
+    const activeUser: Ref<'O' | 'X'> = ref('O');
     const winner: Ref<string | null> = ref(null);
 
     const gameArr = ref([
@@ -140,15 +147,39 @@ export default defineComponent({
       }
     }
 
+    function computerSelect() {
+      console.log('computerSelect');
+
+      const randomNum = Math.floor(Math.random() * 3);
+      let selected = gameArr.value[randomNum][randomNum];
+      console.log('selected : ', selected);
+      if (!selected) {
+        selected = 'X';
+        activeUser.value = 'O';
+        return true;
+      }
+      return false;
+    }
+
     function onClickPad(i: number, j: number) {
-      // 해당 위치에 값이 없을 때,
       if (!gameArr.value[i][j]) {
+        // 해당 위치에 값이 없을 때,
         gameArr.value[i][j] = activeUser.value;
 
         if (!checkVictory()) {
           activeUser.value = activeUser.value === 'O' ? 'X' : 'O';
+
+          // TODO : 컴퓨터와의 대결
+          if (gameType.value.value === 'computer') {
+            console.log('computer : ', computerSelect());
+            if (!computerSelect()) {
+              computerSelect();
+            }
+          }
           return;
         }
+
+        // TODO 무승부
 
         // 승리자!
         userScore.value[activeUser.value]++;
@@ -175,6 +206,9 @@ export default defineComponent({
     }
 
     return {
+      gameTypeOptions,
+
+      gameType,
       userScore,
       activeUser,
       winner,
